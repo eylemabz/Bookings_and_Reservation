@@ -1,32 +1,56 @@
 package render
 
 import (
+	"bytes"
 	"fmt"
+	"log"
 	"net/http"
 	"path/filepath"
 	"text/template"
+
+	"github.com/eylemabz/go-course/pkg/config"
 )
 
-func RenderTemplate(w http.ResponseWriter, html string) {
+var functions = template.FuncMap{}
+var app *config.AppConfig
 
-	_, err := RenderTemplateTest(w)
-
-	if err != nil {
-		fmt.Println("Error getting template cache:", err)
-	}
-
-	parsedTemplate, _ := template.ParseFiles("./templates/" + html)
-
-	err = parsedTemplate.Execute(w, nil)
-	if err != nil {
-		fmt.Println("error parsing template:", err)
-		return
-	}
+//NewTemplate sets the config for the template package
+func NewTemplate(a *config.AppConfig) {
+	app = a
 }
 
-var functions = template.FuncMap{}
+func AddDefault(td *models.Template) *models.TemplateData {
+	return td
+}
+func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData) {
+	var tc map[string]*template.Template
 
-func RenderTemplateTest(w http.ResponseWriter, hmtl string) (map[string]*template.Template, error) {
+	if app.UseCache {
+		// get the template cache from the app config
+		tc = app.TemplateCache
+
+	} else {
+		tc, _ = CreateTemplateCache()
+	}
+
+	t, ok := tc[html]
+	if !ok {
+		log.Fatal("could not get teemplate from template cache")
+	}
+
+	buf := new(bytes.Buffer)
+
+	_ = t.Execute(buf, nil)
+
+	_, err := buf.WriteTo(w)
+	if err != nil {
+		fmt.Println("Error writing template to browser", err)
+	}
+
+}
+
+// createtemplate cache  creates a template cache as a map
+func CreateTemplateCache() (map[string]*template.Template, error) {
 
 	myCache := map[string]*template.Template{}
 
