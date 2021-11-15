@@ -9,17 +9,18 @@ import (
 	"text/template"
 
 	"github.com/eylemabz/go-course/pkg/config"
+	"github.com/eylemabz/go-course/pkg/models"
 )
 
 var functions = template.FuncMap{}
 var app *config.AppConfig
 
 //NewTemplate sets the config for the template package
-func NewTemplate(a *config.AppConfig) {
+func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefault(td *models.Template) *models.TemplateData {
+func AddDefaultData(td *models.TemplateData) *models.TemplateData {
 	return td
 }
 func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData) {
@@ -39,7 +40,7 @@ func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData)
 	}
 
 	buf := new(bytes.Buffer)
-
+	td = AddDefaultData(td)
 	_ = t.Execute(buf, nil)
 
 	_, err := buf.WriteTo(w)
@@ -62,7 +63,6 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 
 	for _, page := range pages {
 		name := filepath.Base(page)
-		fmt.Println("page is current ", page)
 		ts, err := template.New(name).Funcs(functions).ParseFiles(page)
 
 		if err != nil {
@@ -77,9 +77,10 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 
 		if len(matches) > 0 {
 			ts, err = ts.ParseGlob("./templates/*.layout.html")
-		}
-		if err != nil {
-			return myCache, err
+
+			if err != nil {
+				return myCache, err
+			}
 		}
 		myCache[name] = ts
 	}
