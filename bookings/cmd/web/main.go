@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/eylemabz/go-course/pkg/config"
-	"github.com/eylemabz/go-course/pkg/handlers"
-	"github.com/eylemabz/go-course/pkg/render"
+	"github.com/eylemabz/go-course/bookings/pkg/config"
+	"github.com/eylemabz/go-course/bookings/pkg/handlers"
+	"github.com/eylemabz/go-course/bookings/pkg/render"
 )
 
 const portNumber = ":1313"
@@ -19,16 +19,15 @@ var session *scs.SessionManager
 
 // main is the main function
 func main() {
-
-	//change this to true when in production
-
+	// change this to true when in production
 	app.InProduction = false
 
-	session := scs.New()
+	// set up the session
+	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
 	session.Cookie.SameSite = http.SameSiteLaxMode
-	session.Cookie.Secure = false
+	session.Cookie.Secure = app.InProduction
 
 	app.Session = session
 
@@ -56,5 +55,4 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }

@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/eylemabz/go-course/pkg/config"
-	"github.com/eylemabz/go-course/pkg/handlers"
+	"github.com/eylemabz/go-course/bookings/pkg/config"
+	"github.com/eylemabz/go-course/bookings/pkg/handlers"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 )
