@@ -1,22 +1,4 @@
-    <!doctype html>
-    <html lang="en">
-
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <title>My Nice Page</title>
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
-            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
-        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-        
-    </head>
-
-    <body>
+{{define "base"}}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Navbar</a>
@@ -26,18 +8,18 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="/about">About</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Rooms
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="generals.html">General's Quarters</a>
-          <a class="dropdown-item" href="majors.html">Major's Suite</a>
+          <a class="dropdown-item" href="/generals-guarters">General's Quarters</a>
+          <a class="dropdown-item" href="/majors-suite">Major's Suite</a>
         </div>
       </li>
       <li class="nav-item">
@@ -51,54 +33,26 @@
   </div>
 </nav>
 
-
-    
-
-    <div class="container">
-        <div class="row">
-          <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <h1 class="mt-5">Search for Availability</h1>
-
-          <form action="reservation.html" method="get" novalidate class="needs-validation">
-
-              <div class="form-row">
-                <div class="col">
-                <div class="form-row" id="reservation-date">
-                  <div class="col">
-                  <input required class="form-control" type="text" name="start" placeholder="Arrival">
-                   </div>
-                   <div class="col">
-                  <input required class="form-control" type="text" name="end" placeholder="Departure">  
-                </div>
-             </div>
-            </div>
-         </div>
-              <hr>
-                     <button type="submit" class="btn btn-primary">Search Availability</button>
-         </form>
-           
+  
+   {{block "content" .}}
+      
+  {{end}}
 
 
-            </div>
-        </div>
- 
 
-    <footer class="my-footer">
-        <div class="row">
-            <div class="col">
-                left
-            </div>
-
-            <div class="col">
-                center
-            </div>
-
-            <div class="col">
-                right
-            </div>
-        </div>
-    </footer>
+<footer class="my-footer">
+   <div class="row">
+      <div class="col">
+          left
+      </div>
+      <div class="col">
+          enter
+      </div>
+      <div class="col">
+           right
+      </div>
+    </div>
+</footer>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
@@ -283,6 +237,8 @@ function Prompt(){
 
 </script>
 
-    </body>
+ </body>
 
-    </html>
+ </html>
+
+{{end}}
