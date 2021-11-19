@@ -3,10 +3,10 @@ package render
 import (
 	"bytes"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
-	"text/template"
 
 	"github.com/eylemabz/go-course/bookings/pkg/config"
 	"github.com/eylemabz/go-course/bookings/pkg/models"
@@ -29,7 +29,6 @@ func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData)
 	if app.UseCache {
 		// get the template cache from the app config
 		tc = app.TemplateCache
-
 	} else {
 		tc, _ = CreateTemplateCache()
 	}
@@ -41,7 +40,7 @@ func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData)
 
 	buf := new(bytes.Buffer)
 	td = AddDefaultData(td)
-	_ = t.Execute(buf, nil)
+	_ = t.Execute(buf, td)
 
 	_, err := buf.WriteTo(w)
 	if err != nil {
