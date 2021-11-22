@@ -52,10 +52,22 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+//Reservation renders the make a reservation page and displays form
+func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "make-reservation.md", &models.TemplateData{})
+}
+
+//Generals render room page
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "general.page.md", &models.TemplateData{})
 }
 
+//Majors renders the room page
 func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "majors.md", &models.TemplateData{})
+}
+
+//Availability renders the availability page
+func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "ssearch-availability.page.md", &models.TemplateData{})
 }

@@ -1,4 +1,20 @@
+
 {{define "base"}}
+
+<!doctype html>
+    <html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>My Nice Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">  
+    </head>
+    <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Navbar</a>
@@ -23,22 +39,18 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="reservation.html">Book Now</a>
+        <a class="nav-link" href="/search-availability">Book Now</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="contact.html">Contact</a>
       </li>
-      
     </ul>
   </div>
 </nav>
 
-  
    {{block "content" .}}
-      
+
   {{end}}
-
-
 
 <footer class="my-footer">
    <div class="row">
@@ -54,17 +66,15 @@
     </div>
 </footer>
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
 <script src="https://unpkg.com/notie"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
 <script>
 let attention=Prompt();
@@ -86,7 +96,6 @@ let attention=Prompt();
     }, false);
   })();
 
-
   document.getElementById("colorButton").addEventistener("click",function(){
    let html=`
     <form Id="check-availability-form" action="" method="" novalidate class="needs-validation">
@@ -106,16 +115,14 @@ let attention=Prompt();
       </div>
     </form>
    `
-   
-  
+
    attention.success({msg:html, title:"Chose your dates"});
   })
 
   const elem = document.getElementById('reservation-date');
   const rangepicker = new DateRangePicker(elem, {
      format:"yyyy-mm-dd"
-}); 
-    
+});
 
 function notify(msg, msgType){
   notie.alert({
@@ -152,10 +159,9 @@ function Prompt(){
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-    
+
     Toast.fire({})
   }
-
 
   let success=function(c){
     const{
@@ -184,7 +190,6 @@ function Prompt(){
       error:error,
     })
   }
-
 
   async function custom(c){
     const{
@@ -223,8 +228,6 @@ function Prompt(){
     }
   }
 
-
-
   return{
     toast:toast,
     success:success,
@@ -233,12 +236,9 @@ function Prompt(){
   }
 }
 
-
-
 </script>
 
  </body>
 
  </html>
-
 {{end}}
